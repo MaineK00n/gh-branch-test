@@ -1,0 +1,28 @@
+name: Action3
+on:
+  workflow_run:
+    workflows: [Action2]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  action:
+    name: Action3
+    runs-on: ubuntu-latest
+    steps:
+      - name: branch test 1
+        run: |
+          echo "Branch: ${{ github.ref_name }}"
+
+      - name: branch test 2
+        run: |
+          echo "Branch: ${{ github.head_ref }}"
+
+      - name: branch test 3
+        run: |
+          echo "Branch: ${{ github.event.workflow_run.head_branch }}"
+
+      - name: branch test 4
+        run: |
+          echo "Branch: ${{ github.event.repository.default_branch }}"
